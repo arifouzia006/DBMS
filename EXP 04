@@ -48,3 +48,14 @@ mysql> SELECT * from student;
 |   182 | poojitha | f      | 2004-09-20 | madanpalle |   18 |
 +-------+----------+--------+------------+------------+------+
 4 rows in set (0.00 sec)
+mysql> delete from student where name='poojitha';
+Query OK, 2 rows affected (0.02 sec)
+
+mysql> SELECT * from student;
++-------+--------+--------+------------+----------+------+
+| regno | name   | gender | dob        | city     | age  |
++-------+--------+--------+------------+----------+------+
+|   235 | navya  | f      | 2005-10-07 | gudivada |   17 |
+|   999 | mohith | m      | 2004-07-21 | ongole   |   18 |
++-------+--------+--------+------------+----------+------+
+2 rows in set (0.00 sec)
