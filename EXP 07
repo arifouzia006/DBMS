@@ -1,0 +1,102 @@
+mysql> use university;
+Database changed
+mysql> select name,gender,dob from student order by regno;
++--------+--------+------------+
+| name   | gender | dob        |
++--------+--------+------------+
+| navya  | f      | 2005-10-07 |
+| mohith | m      | 2004-07-21 |
++--------+--------+------------+
+2 rows in set (0.00 sec)
+
+mysql> select name,gender,dob from student order by name;
++--------+--------+------------+
+| name   | gender | dob        |
++--------+--------+------------+
+| mohith | m      | 2004-07-21 |
+| navya  | f      | 2005-10-07 |
++--------+--------+------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from mark;
++-------+---------+-------+
+| regno | name    | marks |
++-------+---------+-------+
+|   235 |  navya  |    25 |
+|   999 | mohith  |    20 |
+|   666 | arif    |    26 |
+|   235 | navya   |    25 |
+|   999 | mohith  |    22 |
+|   235 | navya   |    25 |
+|   999 | mohith  |    22 |
+|   666 | maheera |    21 |
+|   235 | navya   |    25 |
+|   999 | mohith  |    23 |
+|   666 | arif    |    26 |
+|   235 | navya   |    25 |
+|   999 | mohith  |    21 |
+|   666 | arif    |    26 |
++-------+---------+-------+
+14 rows in set (0.00 sec)
+
+mysql> select name,marks from mark order by marks;
++---------+-------+
+| name    | marks |
++---------+-------+
+| mohith  |    20 |
+| maheera |    21 |
+| mohith  |    21 |
+| mohith  |    22 |
+| mohith  |    22 |
+| mohith  |    23 |
+| navya   |    25 |
+| navya   |    25 |
+|  navya  |    25 |
+| navya   |    25 |
+| navya   |    25 |
+| arif    |    26 |
+| arif    |    26 |
+| arif    |    26 |
++---------+-------+
+14 rows in set (0.00 sec)
+
+mysql> select name,marks from mark order by marks DESC;
++---------+-------+
+| name    | marks |
++---------+-------+
+| arif    |    26 |
+| arif    |    26 |
+| arif    |    26 |
+| navya   |    25 |
+| navya   |    25 |
+|  navya  |    25 |
+| navya   |    25 |
+| navya   |    25 |
+| mohith  |    23 |
+| mohith  |    22 |
+| mohith  |    22 |
+| mohith  |    21 |
+| maheera |    21 |
+| mohith  |    20 |
++---------+-------+
+14 rows in set (0.00 sec)
+
+mysql> select count(name) from student;
++-------------+
+| count(name) |
++-------------+
+|           2 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select count(name), regno from student
+    -> group by regno having count(name)>0;
++-------------+-------+
+| count(name) | regno |
++-------------+-------+
+|           1 |   235 |
+|           1 |   999 |
++-------------+-------+
+2 rows in set (0.00 sec)
+
+mysql>
