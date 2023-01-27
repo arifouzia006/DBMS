@@ -1,0 +1,99 @@
+
+mysql> use university;
+Database changed
+mysql> desc student;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| regno  | int(3)      | YES  |     | NULL    |       |
+| name   | varchar(15) | YES  |     | NULL    |       |
+| gender | varchar(1)  | YES  |     | NULL    |       |
+| dob    | date        | YES  |     | NULL    |       |
+| city   | varchar(15) | YES  |     | NULL    |       |
+| age    | int(19)     | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+6 rows in set (0.02 sec)
+
+mysql> select * from student where regno between 235 and 999;
++-------+--------+--------+------------+----------+------+
+| regno | name   | gender | dob        | city     | age  |
++-------+--------+--------+------------+----------+------+
+|   235 | navya  | f      | 2005-10-07 | gudivada |   17 |
+|   999 | mohith | m      | 2004-07-21 | ongole   |   18 |
++-------+--------+--------+------------+----------+------+
+2 rows in set (0.00 sec)
+
+mysql> select * from student where regno between 235 and 666;
++-------+-------+--------+------------+----------+------+
+| regno | name  | gender | dob        | city     | age  |
++-------+-------+--------+------------+----------+------+
+|   235 | navya | f      | 2005-10-07 | gudivada |   17 |
++-------+-------+--------+------------+----------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from mark where marks between 20 and 26;
++-------+---------+-------+
+| regno | name    | marks |
++-------+---------+-------+
+|   235 |  navya  |    25 |
+|   999 | mohith  |    20 |
+|   666 | arif    |    26 |
+|   235 | navya   |    25 |
+|   999 | mohith  |    22 |
+|   235 | navya   |    25 |
+|   999 | mohith  |    22 |
+|   666 | maheera |    21 |
+|   235 | navya   |    25 |
+|   999 | mohith  |    23 |
+|   666 | arif    |    26 |
+|   235 | navya   |    25 |
+|   999 | mohith  |    21 |
+|   666 | arif    |    26 |
++-------+---------+-------+
+14 rows in set (0.00 sec)
+
+mysql> select count(name) from student;
++-------------+
+| count(name) |
++-------------+
+|           2 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select count(name), regno from student
+    -> group by regno having count(name)>0;
++-------------+-------+
+| count(name) | regno |
++-------------+-------+
+|           1 |   235 |
+|           1 |   999 |
++-------------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select avg(marks) from mark
+    -> ;
++------------+
+| avg(marks) |
++------------+
+|    23.7143 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select sum( marks) from mark
+    -> ;
++-------------+
+| sum( marks) |
++-------------+
+|         332 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select * from student where gender in ('M');
++-------+--------+--------+------------+--------+------+
+| regno | name   | gender | dob        | city   | age  |
++-------+--------+--------+------------+--------+------+
+|   999 | mohith | m      | 2004-07-21 | ongole |   18 |
++-------+--------+--------+------------+--------+------+
+1 row in set (0.00 sec)
+
+mysql>
