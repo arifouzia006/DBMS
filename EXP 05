@@ -1,0 +1,297 @@
+mysql> use university;
+Database changed
+mysql> desc student;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| regno  | int(3)      | YES  |     | NULL    |       |
+| name   | varchar(15) | YES  |     | NULL    |       |
+| gender | varchar(1)  | YES  |     | NULL    |       |
+| dob    | date        | YES  |     | NULL    |       |
+| city   | varchar(15) | YES  |     | NULL    |       |
+| age    | int(19)     | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> select * from student;
++-------+--------+--------+------------+----------+------+
+| regno | name   | gender | dob        | city     | age  |
++-------+--------+--------+------------+----------+------+
+|   235 | navya  | f      | 2005-10-07 | gudivada |   17 |
+|   999 | mohith | m      | 2004-07-21 | ongole   |   18 |
++-------+--------+--------+------------+----------+------+
+2 rows in set (0.00 sec)
+
+mysql> select * from student where regno=235;
++-------+-------+--------+------------+----------+------+
+| regno | name  | gender | dob        | city     | age  |
++-------+-------+--------+------------+----------+------+
+|   235 | navya | f      | 2005-10-07 | gudivada |   17 |
++-------+-------+--------+------------+----------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from student where regno between 235 and 999;
++-------+--------+--------+------------+----------+------+
+| regno | name   | gender | dob        | city     | age  |
++-------+--------+--------+------------+----------+------+
+|   235 | navya  | f      | 2005-10-07 | gudivada |   17 |
+|   999 | mohith | m      | 2004-07-21 | ongole   |   18 |
++-------+--------+--------+------------+----------+------+
+2 rows in set (0.00 sec)
+
+mysql> desc mark;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| regno | int(6)      | YES  |     | NULL    |       |
+| name  | varchar(10) | YES  |     | NULL    |       |
+| marks | int(3)      | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.02 sec)
+
+mysql> insert into mark values('235','navya','25');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into mark values('999','mohith','21');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into mark values('666','arif','26');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from mark;
++-------+---------+-------+
+| regno | name    | marks |
++-------+---------+-------+
+|   235 |  navya  |    25 |
+|   999 | mohith  |    20 |
+|   666 | arif    |    26 |
+|   235 | navya   |    25 |
+|   999 | mohith  |    22 |
+|   235 | navya   |    25 |
+|   999 | mohith  |    22 |
+|   666 | maheera |    21 |
+|   235 | navya   |    25 |
+|   999 | mohith  |    23 |
+|   666 | arif    |    26 |
+|   235 | navya   |    25 |
+|   999 | mohith  |    21 |
+|   666 | arif    |    26 |
++-------+---------+-------+
+14 rows in set (0.00 sec)
+
+mysql> select avg(marks) from mark;
++------------+
+| avg(marks) |
++------------+
+|    23.7143 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select max(marks) from mark;
++------------+
+| max(marks) |
++------------+
+|         26 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select min(mark) from mark;
+ERROR 1054 (42S22): Unknown column 'mark' in 'field list'
+mysql> select min(marks) from mark;
++------------+
+| min(marks) |
++------------+
+|         20 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select sum(marks) from mark;
++------------+
+| sum(marks) |
++------------+
+|        332 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select * from student where name LIKE '%AA';
+Empty set (0.00 sec)
+
+mysql> select * from student where name LIKE '%NI';
+Empty set (0.00 sec)
+
+mysql> select * from student where name LIKE '%CH';
+Empty set (0.00 sec)
+
+mysql> select * from student where name LIKE '%ch';
+Empty set (0.00 sec)
+
+mysql> select * from student where regno between 335 and 235;
+Empty set (0.00 sec)
+
+mysql> select * from student where regno between 335 and 999;
++-------+--------+--------+------------+--------+------+
+| regno | name   | gender | dob        | city   | age  |
++-------+--------+--------+------------+--------+------+
+|   999 | mohith | m      | 2004-07-21 | ongole |   18 |
++-------+--------+--------+------------+--------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from mark where marks between 20 and 26;
++-------+---------+-------+
+| regno | name    | marks |
++-------+---------+-------+
+|   235 |  navya  |    25 |
+|   999 | mohith  |    20 |
+|   666 | arif    |    26 |
+|   235 | navya   |    25 |
+|   999 | mohith  |    22 |
+|   235 | navya   |    25 |
+|   999 | mohith  |    22 |
+|   666 | maheera |    21 |
+|   235 | navya   |    25 |
+|   999 | mohith  |    23 |
+|   666 | arif    |    26 |
+|   235 | navya   |    25 |
+|   999 | mohith  |    21 |
+|   666 | arif    |    26 |
++-------+---------+-------+
+14 rows in set (0.01 sec)
+
+mysql> select count(name) from studeny;
+ERROR 1146 (42S02): Table 'university.studeny' doesn't exist
+mysql> select count(name) from student;
++-------------+
+| count(name) |
++-------------+
+|           2 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select count(name),regno from student
+    -> group by regno having count(name)>0;
++-------------+-------+
+| count(name) | regno |
++-------------+-------+
+|           1 |   235 |
+|           1 |   999 |
++-------------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select avg(marks) from mark
+    -> ;
++------------+
+| avg(marks) |
++------------+
+|    23.7143 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select sum(marks) from mark
+    -> ;
++------------+
+| sum(marks) |
++------------+
+|        332 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select name,gender,dob, from student order by regno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from student order by regno' at line 1
+mysql> select name,gender,dob from student order by regno;
++--------+--------+------------+
+| name   | gender | dob        |
++--------+--------+------------+
+| navya  | f      | 2005-10-07 |
+| mohith | m      | 2004-07-21 |
++--------+--------+------------+
+2 rows in set (0.00 sec)
+
+mysql> select name,gender,dob from student order by name;
++--------+--------+------------+
+| name   | gender | dob        |
++--------+--------+------------+
+| mohith | m      | 2004-07-21 |
+| navya  | f      | 2005-10-07 |
++--------+--------+------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from mark;
++-------+---------+-------+
+| regno | name    | marks |
++-------+---------+-------+
+|   235 |  navya  |    25 |
+|   999 | mohith  |    20 |
+|   666 | arif    |    26 |
+|   235 | navya   |    25 |
+|   999 | mohith  |    22 |
+|   235 | navya   |    25 |
+|   999 | mohith  |    22 |
+|   666 | maheera |    21 |
+|   235 | navya   |    25 |
+|   999 | mohith  |    23 |
+|   666 | arif    |    26 |
+|   235 | navya   |    25 |
+|   999 | mohith  |    21 |
+|   666 | arif    |    26 |
++-------+---------+-------+
+14 rows in set (0.00 sec)
+
+mysql> select name,marks from mark order by marks;
++---------+-------+
+| name    | marks |
++---------+-------+
+| mohith  |    20 |
+| maheera |    21 |
+| mohith  |    21 |
+| mohith  |    22 |
+| mohith  |    22 |
+| mohith  |    23 |
+| navya   |    25 |
+| navya   |    25 |
+|  navya  |    25 |
+| navya   |    25 |
+| navya   |    25 |
+| arif    |    26 |
+| arif    |    26 |
+| arif    |    26 |
++---------+-------+
+14 rows in set (0.00 sec)
+
+mysql> select name,marks from mark order by marks DESC;
++---------+-------+
+| name    | marks |
++---------+-------+
+| arif    |    26 |
+| arif    |    26 |
+| arif    |    26 |
+| navya   |    25 |
+| navya   |    25 |
+|  navya  |    25 |
+| navya   |    25 |
+| navya   |    25 |
+| mohith  |    23 |
+| mohith  |    22 |
+| mohith  |    22 |
+| mohith  |    21 |
+| maheera |    21 |
+| mohith  |    20 |
++---------+-------+
+14 rows in set (0.00 sec)
+
+mysql> select count(name) from student;
++-------------+
+| count(name) |
++-------------+
+|           2 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select count(name), regno from student
+    -> group by regno having count(name)>0;
++-------------+-------+
+| count(name) | regno |
++-------------+-------+
+|           1 |   235 |
+|           1 |   999 |
++-------------+-------+
+2 rows in set (0.00 sec)
